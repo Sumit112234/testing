@@ -1,6 +1,6 @@
 {
     "version" : 2,
-    "name" : "test..",
+    "name" : "test",
     "builds" : [
         {
             "src" : "./server.js",
