@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../model/user');
 const router = express.Router();
 
 // Mock Data
@@ -13,13 +14,14 @@ router.get('/', (req, res) => {
 });
 
 // Get user by ID
-router.get('/:id', (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ message: 'User not found' });
-  }
+router.get('/mongo', async(req, res) => {
+    try {
+        let user = await User.find();
+        res.json({user});
+    } catch (error) {
+        res.json({message : error})
+    }
+
 });
 
 // Add a new user
