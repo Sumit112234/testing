@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/product');
@@ -14,13 +15,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error('MongoDB Connection Error:', err));
+
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 
 // Root Route
 app.get('/', (req, res) => {
-  res.send('Welcome to the Express server!');
+  res.send('Welcome to the Express server with MongoDB!');
 });
 
 // Start Server
