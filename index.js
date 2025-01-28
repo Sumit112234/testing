@@ -16,7 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+
+try{
+  mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB Connected ! yes.')
     app.listen(PORT, () => {
@@ -26,6 +28,11 @@ mongoose.connect(process.env.MONGO_URI)
   })
   .catch(err => console.error('MongoDB Connection Error:', err));
 
+}
+catch(e)
+{
+  console.log("e for error : ", e);
+}
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
