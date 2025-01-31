@@ -24,3 +24,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+backend/node_modules
+fronend/node_modules
+.env
+backend/.env
+fronend/.env

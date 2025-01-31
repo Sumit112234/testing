@@ -4,6 +4,8 @@ import io from "socket.io-client";
 
 const SocketContext = createContext();
 
+let url = import.meta.env.BACKEND_URL;
+
 export const useSocketContext = () => {
 	return useContext(SocketContext);
 };
@@ -15,7 +17,7 @@ export const SocketContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (authUser) {
-			const socket = io("https://chat-app-yt.onrender.com", {
+			const socket = io(url, {
 				query: {
 					userId: authUser._id,
 				},
